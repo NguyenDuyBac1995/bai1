@@ -22,9 +22,21 @@ class _LoginAcountState extends State<LoginAcount> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('NguyenDuyBac', '123456');
   }
+  String? text;
+  var value;
+  _getData()async{
+    print('$_password');
+   final SharedPreferences prefs = await SharedPreferences.getInstance();
+   value = prefs.getString('$_password');
+   print('$value');
+   if (
+   value != null
+   ){
+     text = value;
+   }
+  }
 
   final GlobalKey<FormState> _fromKey = GlobalKey<FormState>();
-  bool? value;
   void validateAndSave (){
     final FormState? form = _fromKey.currentState;
     if (form!.validate()) {
@@ -37,12 +49,11 @@ class _LoginAcountState extends State<LoginAcount> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    resetNewLaunch();
     print(' DATA : ${widget.id}');
   }
 
   bool _obscureText = true;
-  late String _password;
+  var _password;
 
   void _toggle() {
     setState(() {
@@ -79,29 +90,55 @@ class _LoginAcountState extends State<LoginAcount> {
                     SizedBox(height: 10),
                     Form(
                       key: _fromKey,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Username or email address",style: TextStyles.textSize14,),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
                                 BorderSide(width: 0.5, color: Colors.blue),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          border: OutlineInputBorder(
-                              borderSide:
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              border: OutlineInputBorder(
+                                  borderSide:
                                   BorderSide(width: 0.5, color: Colors.black38),
-                              borderRadius: BorderRadius.circular(10)),
-                          hintText: 'Password',
-                          prefixIcon: Icon(Icons.lock),
-                          suffixIcon: IconButton(
-                              onPressed: _toggle,
-                              icon: Icon(_obscureText
-                                  ? Icons.visibility_off
-                                  : Icons.visibility)),
-                        ),
-                        validator: (val) =>
-                            val!.length < 6 ? 'Password too short' : null,
-                        onSaved: (val) => _password = val!,
-                        obscureText: _obscureText,
+                                  borderRadius: BorderRadius.circular(10)),
+                              hintText: 'Username or email',
+                              prefixIcon: Icon(Icons.person),
+                            ),
+                            validator: (val) =>
+                            value == null ? 'Incorrect username' : null,
+                            onChanged: (val) => _password = val,
+                          ),
+                          SizedBox(height: 5),
+                          Text("Password",style: TextStyles.textSize14,),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(width: 0.5, color: Colors.blue),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              border: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(width: 0.5, color: Colors.black38),
+                                  borderRadius: BorderRadius.circular(10)),
+                              hintText: 'Password',
+                              prefixIcon: Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                  onPressed: _toggle,
+                                  icon: Icon(_obscureText
+                                      ? Icons.visibility_off
+                                      : Icons.visibility)),
+                            ),
+                            validator: (val) =>
+                            val != text ? 'Password too short' : null,
+                            obscureText: _obscureText,
+
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 10,
@@ -162,12 +199,13 @@ class _LoginAcountState extends State<LoginAcount> {
                             ),
                           ),
                           onTap: () {
-                                validateAndSave();
+                              _getData();
+                              validateAndSave();
                             },
                         ),
                       ],
                     ),
-                    SizedBox(height: 50),
+                    SizedBox(height: 30),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       child: Text('Use Social Login',
@@ -175,7 +213,7 @@ class _LoginAcountState extends State<LoginAcount> {
                           style: TextStyle(
                               color: Color(0xff1B1D28), fontSize: 12)),
                     ),
-                    SizedBox(height: 40),
+                    SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -186,19 +224,23 @@ class _LoginAcountState extends State<LoginAcount> {
                         SvgPicture.asset('assets/svg/Facebook Logo.svg'),
                       ],
                     ),
-                    SizedBox(height: 50),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                        'Create an account',
-                        textAlign: TextAlign.center,
-                        style:
-                            TextStyle(color: Color(0xff1B1D28), fontSize: 16),
-                      ),
-                    )
+
                   ],
                 ),
               ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 20,
+                  child:  Container(
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  'Create an account',
+                  textAlign: TextAlign.center,
+                  style:
+                  TextStyle(color: Color(0xff1B1D28), fontSize: 16),
+                ),
+              ))
             ],
           ),
         ),
