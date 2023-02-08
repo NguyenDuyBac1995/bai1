@@ -17,7 +17,6 @@ String? id ;
 DataBundle({this.id});
 }
 
-
 class RouterGenerator{
   static const routeHome = "/home";
   static const routeLogin = "/login";
