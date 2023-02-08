@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../widget/utils/colors.dart';
+import 'package:page_transition/page_transition.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -98,7 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         onTap: (){
-                          NavigatorUtils.push(context, RouterGenerator.routeLoginAcount);
+                         var data = DataBundle(id: "123567");
+                          Navigator.pushNamed(context, RouterGenerator.routeLoginAcount,arguments: data );
                         },
                       ),
                     ],

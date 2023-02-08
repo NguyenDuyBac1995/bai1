@@ -10,9 +10,11 @@ import 'package:bai_tap_figma1/ui/screen/storage_details/storage_details_screen.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '404.dart';
+import 'package:page_transition/page_transition.dart';
 
 class DataBundle{
-
+String? id ;
+DataBundle({this.id});
 }
 
 
@@ -35,7 +37,15 @@ class RouterGenerator{
       case routeLogin:
         return MaterialPageRoute(builder: (_)=> const LoginScreen());
       case routeLoginAcount:
-        return MaterialPageRoute(builder: (_)=> const LoginAcount());
+        if(args is DataBundle){
+          return PageTransition(
+            child: LoginAcount(id : args.id!),
+            type: PageTransitionType.rightToLeft,
+            settings: settings,
+            duration: Duration(milliseconds: 300),
+          );
+        }
+        break;
       case routeHome:
         return MaterialPageRoute(builder: (_)=> const HomeScreen());
       case routeMenu:

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../router/fluro_navigator.dart';
@@ -5,22 +7,49 @@ import '../../router/router_generator.dart';
 import '../../widget/utils/assets_utils.dart';
 import '../../widget/utils/colors.dart';
 import '../../widget/utils/text_styles.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginAcount extends StatefulWidget {
-  const LoginAcount({Key? key}) : super(key: key);
+  const LoginAcount({Key? key, required this.id}) : super(key: key);
+  final String id;
 
   @override
   State<LoginAcount> createState() => _LoginAcountState();
 }
 
 class _LoginAcountState extends State<LoginAcount> {
+  resetNewLaunch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('NguyenDuyBac', '123456');
+  }
+
+  final GlobalKey<FormState> _fromKey = GlobalKey<FormState>();
+  bool? value;
+  void validateAndSave (){
+    final FormState? form = _fromKey.currentState;
+    if (form!.validate()) {
+      NavigatorUtils.push(context, RouterGenerator.routeHome);
+    } else {
+      print('Form is valid');
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    resetNewLaunch();
+    print(' DATA : ${widget.id}');
+  }
+
   bool _obscureText = true;
   late String _password;
-  void _toggle(){
+
+  void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,37 +76,36 @@ class _LoginAcountState extends State<LoginAcount> {
                       style: TextStyles.textSize20
                           .copyWith(fontSize: 34, fontWeight: FontWeight.w700),
                     ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Best cloud storage platform for all',
-                      style: TextStyles.textSize14,
-                    ),
-                    Text('business and individual to',
-                        style: TextStyles.textSize14),
-                    Text('manage there data', style: TextStyles.textSize14),
                     SizedBox(height: 10),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 0.5,color: Colors.blue),
-                          borderRadius: BorderRadius.circular(10),
+                    Form(
+                      key: _fromKey,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 0.5, color: Colors.blue),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 0.5, color: Colors.black38),
+                              borderRadius: BorderRadius.circular(10)),
+                          hintText: 'Password',
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                              onPressed: _toggle,
+                              icon: Icon(_obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility)),
                         ),
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 0.5,color: Colors.black38),
-                            borderRadius: BorderRadius.circular(10)
-                        ),
-                        hintText: 'Password',
-                        prefixIcon: Padding(
-                          padding: EdgeInsets.only(),
-                          child: Icon(Icons.lock),
-                        ),
-                        suffixIcon: IconButton(onPressed: _toggle, icon: Icon(_obscureText?Icons.lock_outline:Icons.lock_open)),
+                        validator: (val) =>
+                            val!.length < 6 ? 'Password too short' : null,
+                        onSaved: (val) => _password = val!,
+                        obscureText: _obscureText,
                       ),
-                      validator: (value)=> value!.length < 6 ? 'Password too short': null,
-                      onSaved: (val)=>_password = val!,
-                      obscureText: _obscureText,
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 10,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -92,7 +120,10 @@ class _LoginAcountState extends State<LoginAcount> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.arrow_back_rounded, color: Colos.CA,),
+                                Icon(
+                                  Icons.arrow_back_rounded,
+                                  color: Colos.CA,
+                                ),
                                 SizedBox(width: 5),
                                 Text('Back page',
                                     style: TextStyles.textSize14.copyWith(
@@ -102,7 +133,7 @@ class _LoginAcountState extends State<LoginAcount> {
                               ],
                             ),
                           ),
-                          onTap: (){
+                          onTap: () {
                             Navigator.pop(context);
                           },
                         ),
@@ -123,13 +154,16 @@ class _LoginAcountState extends State<LoginAcount> {
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white)),
                                 SizedBox(width: 5),
-                                Icon(Icons.arrow_forward,color: Colors.white,)
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
+                                )
                               ],
                             ),
                           ),
-                          onTap: (){
-                            NavigatorUtils.push(context, RouterGenerator.routeLoginAcount);
-                          },
+                          onTap: () {
+                                validateAndSave();
+                            },
                         ),
                       ],
                     ),
@@ -138,7 +172,8 @@ class _LoginAcountState extends State<LoginAcount> {
                       width: MediaQuery.of(context).size.width,
                       child: Text('Use Social Login',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Color(0xff1B1D28),fontSize: 12)),
+                          style: TextStyle(
+                              color: Color(0xff1B1D28), fontSize: 12)),
                     ),
                     SizedBox(height: 40),
                     Row(
@@ -157,7 +192,8 @@ class _LoginAcountState extends State<LoginAcount> {
                       child: Text(
                         'Create an account',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Color(0xff1B1D28),fontSize: 16),
+                        style:
+                            TextStyle(color: Color(0xff1B1D28), fontSize: 16),
                       ),
                     )
                   ],
