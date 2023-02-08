@@ -1,7 +1,6 @@
 import 'package:bai_tap_figma1/ui/screen/change_password/change_password_screen.dart';
 import 'package:bai_tap_figma1/ui/screen/create_account/create_account.dart';
 import 'package:bai_tap_figma1/ui/screen/home/home_screen.dart';
-import 'package:bai_tap_figma1/ui/screen/login/create_account_screen.dart';
 import 'package:bai_tap_figma1/ui/screen/login/login_screen.dart';
 import 'package:bai_tap_figma1/ui/screen/menu/side_menu_screen.dart';
 import 'package:bai_tap_figma1/ui/screen/profile/profile_screen.dart';
