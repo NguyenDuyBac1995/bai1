@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:bai_tap_figma1/ui/widget/utils/colors.dart';
 
 class TextStyles {
@@ -18,5 +17,12 @@ class TextStyles {
       fontFamily: 'gilroy',
       fontWeight: FontWeight.w400,
       decoration: TextDecoration.none);
+
+  static TextStyle textAppBar = TextStyle(
+    fontSize: 16,
+    color: Colos.LOGINTEXT1,
+    fontFamily: 'gilroy',
+    decoration: TextDecoration.none,
+  );
 
 }
