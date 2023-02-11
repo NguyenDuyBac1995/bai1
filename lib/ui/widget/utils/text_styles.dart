@@ -10,6 +10,13 @@ class TextStyles {
     fontFamily: 'gilroy',
     decoration: TextDecoration.none
   );
+  static TextStyle textSize22 = TextStyle(
+      color: Colos.LOGINTEXT1,
+      fontWeight: FontWeight.w600,
+      fontSize: 22,
+      fontFamily: 'gilroy',
+      decoration: TextDecoration.none
+  );
 
   static TextStyle textSize14 = TextStyle(
       fontSize: 16,
@@ -19,10 +26,17 @@ class TextStyles {
       decoration: TextDecoration.none);
 
   static TextStyle textAppBar = TextStyle(
-    fontSize: 16,
+    fontSize: 18,
     color: Colos.LOGINTEXT1,
     fontFamily: 'gilroy',
+    fontWeight: FontWeight.w200,
     decoration: TextDecoration.none,
   );
 
+  static TextStyle textSize24 = TextStyle(
+    fontSize: 28,
+    color: Colos.LOGINTEXT1,
+    fontFamily: "gilroy",
+    fontWeight: FontWeight.w700,
+  );
 }

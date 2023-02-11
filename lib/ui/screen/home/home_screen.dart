@@ -1,4 +1,12 @@
+import 'package:bai_tap_figma1/ui/router/fluro_navigator.dart';
+import 'package:bai_tap_figma1/ui/router/router_generator.dart';
+import 'package:bai_tap_figma1/ui/widget/components/app_bar.dart';
+import 'package:bai_tap_figma1/ui/widget/utils/colors.dart';
+import 'package:bai_tap_figma1/ui/widget/utils/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../widget/components/common.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,11 +16,105 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<String> color = ['0xffEEF7FE','0xffFFFBEC','0xffFEEEEE','0xffF0FFFF','0xffEEF7FE','0xffFFFBEC','0xffFEEEEE','0xffF0FFFF','0xffEEF7FE','0xffFFFBEC'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(),
+      appBar: appBarCommonV2(context, strTitle: 'Your Dribbox'),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.symmetric(horizontal: 25),
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10),
+                  Common().textFromField(
+                      hintValue: 'Search Folder',
+                      icons: Icon(
+                        Icons.search,
+                        color: Colos.LOGINTEXT1,
+                      )),
+                  SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Recent',
+                            style: TextStyles.textAppBar
+                                .copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(width: 10),
+                          Transform.scale(
+                              scale: 1.1,
+                              child: SvgPicture.asset('assets/svg/Vector.svg')),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Transform.scale(
+                              scale: 1.4,
+                              child: SvgPicture.asset(
+                                'assets/svg/3_gach.svg',
+                              )),
+                          SizedBox(width: 28),
+                          Transform.scale(
+                              scale: 1.4,
+                              child: SvgPicture.asset(
+                                'assets/svg/Group 127.svg',
+                              ))
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 150),
+                child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200,
+                        childAspectRatio: 3 / 2,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20),
+                    itemCount: 10,
+                    itemBuilder: (BuildContext ctx, index) {
+                      return Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Color(int.parse(color[index])),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text(color[index]),
+                      );
+                    }),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Transform.scale(
+        scale: 1.35,
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 50, right: 30),
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            backgroundColor: Colos.LOGINTEXT1,
+          ),
+        ),
+      ),
     );
   }
 }

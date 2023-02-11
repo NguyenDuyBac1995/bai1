@@ -10,6 +10,9 @@ class SideMenuScreen extends StatefulWidget {
 class _SideMenuScreenState extends State<SideMenuScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Color(0xffE5E5E5),
+      appBar: AppBar(),
+    );
   }
 }

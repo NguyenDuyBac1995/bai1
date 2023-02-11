@@ -1,5 +1,5 @@
+import 'package:bai_tap_figma1/ui/widget/utils/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../utils/colors.dart';
 
 class Common {
@@ -21,7 +21,7 @@ class Common {
   }) {
     TextFormField textFormField = TextFormField(
       keyboardType: keyboardType,
-      style: textStyle,
+      style: TextStyles.textSize22,
       controller: controller,
       obscureText: obscureText,
       focusNode: fn,
@@ -38,6 +38,7 @@ class Common {
       },
       decoration: InputDecoration(
         hintText: hintValue,
+        hintStyle: TextStyles.textAppBar,
         prefixIcon: icons,
         suffixIcon: suffixIcon,
         focusedBorder: OutlineInputBorder(
@@ -89,15 +90,5 @@ class Common {
         callback;
       },
     );
-  }
-  void showToastSuccess(String str) {
-    Fluttertoast.showToast(
-        msg: str,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 3,
-        backgroundColor: Colors.white,
-        textColor: Colors.blue,
-        fontSize: 16.0);
   }
 }
