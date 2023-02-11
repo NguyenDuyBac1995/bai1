@@ -4,7 +4,7 @@ import 'package:bai_tap_figma1/ui/widget/utils/colors.dart';
 import 'package:bai_tap_figma1/ui/widget/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({Key? key}) : super(key: key);
@@ -23,16 +23,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   resetNewLaunch() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('$strName', '$strPassword');
+    var value = prefs.getString('$strName');
+    print('$value');
   }
   bool _obscureText = true;
   final GlobalKey<FormState> _fromKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    resetNewLaunch() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('NguyenDuyBac', '123456');
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar:
@@ -88,6 +85,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 validation: true,
                 validationError: _textPassword.text.length < 6 ? 'Password too short' : null ,
               ),
+              SizedBox(height: 50),
               Common().ButtonStyle(
                 color: Colos.CA,
                 textValue: 'Create Account',
@@ -97,7 +95,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     strName = _textUserName.text;
                     strPassword = _textPassword.text;
                     resetNewLaunch();
-                    Common().showToastSuccess('Create Account Success');
                   }
                   );
                 }
