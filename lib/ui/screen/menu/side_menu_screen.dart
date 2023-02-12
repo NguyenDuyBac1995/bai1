@@ -4,6 +4,8 @@ import 'package:bai_tap_figma1/ui/widget/components/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../widget/utils/text_styles.dart';
+
 class SideMenuScreen extends StatefulWidget {
   const SideMenuScreen({Key? key}) : super(key: key);
 
@@ -14,12 +16,12 @@ class SideMenuScreen extends StatefulWidget {
 class _SideMenuScreenState extends State<SideMenuScreen> {
   List _menuItem = [
     {'name': 'Home', 'route': RouterGenerator.routeHome},
-    {'name':'Profile', 'route':RouterGenerator.routeProfile},
-    {'name':'Storage','route': RouterGenerator.routeStorageDetail},
-    {'name':'Shared','route':''},
-    {'name':'Stats','route': ''},
-    {'name':'Settings','route':RouterGenerator.routeSetting},
-    {'name':'Help','route':''}
+    {'name': 'Profile', 'route': RouterGenerator.routeProfile},
+    {'name': 'Storage', 'route': RouterGenerator.routeStorageDetail},
+    {'name': 'Shared', 'route': ''},
+    {'name': 'Stats', 'route': ''},
+    {'name': 'Settings', 'route': RouterGenerator.routeSetting},
+    {'name': 'Help', 'route': ''}
   ];
 
   var checkedIndex;
@@ -94,27 +96,45 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: _menuItem.length,
-              itemBuilder: (BuildContext context , index){
+              itemBuilder: (BuildContext context, index) {
                 return Column(
                   children: [
                     Common().ItemList(
-                    strName: _menuItem[index]['name'],
-                    value:  checkedIndex == _menuItem[index]['name'],
-                    callback: (){
-
-                      setState(() {
-                        checkedIndex = _menuItem[index]['name'];
-                      });
-
-                      NavigatorUtils.push(context, _menuItem[index]['route']);
-                    }
-                ),
+                        strName: _menuItem[index]['name'],
+                        value: checkedIndex == _menuItem[index]['name'],
+                        callback: () {
+                          setState(() {
+                            checkedIndex = _menuItem[index]['name'];
+                          });
+                          NavigatorUtils.push(
+                              context, _menuItem[index]['route']);
+                        }),
                     SizedBox(height: 6)
                   ],
                 );
               },
             ),
-          )
+          ),
+          Positioned(
+            bottom: 120,
+            child: GestureDetector(
+              child: Row(
+                children: [
+                  SizedBox(width: 30),
+                  SvgPicture.asset('assets/svg/logout.svg'),
+                  SizedBox(width: 10),
+                  Text('Logout', style: TextStyles.textSize24.copyWith(fontSize: 22),)
+                ],
+              ),
+              onTap: (){
+                NavigatorUtils.push(context, RouterGenerator.routeLogin);
+              },
+            ),
+          ),
+          Positioned(
+            bottom: 50,
+              left: 30,
+              child: Text('Version 2.0.1', style: TextStyles.textSize13,))
         ],
       ),
     );

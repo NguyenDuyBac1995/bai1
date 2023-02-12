@@ -5,7 +5,7 @@ class TextStyles {
 
   static TextStyle textSize20 = TextStyle(
     color: Colos.LOGINTEXT1,
-    fontWeight: FontWeight.w200,
+    fontWeight: FontWeight.w300,
     fontSize: 20,
     fontFamily: 'gilroy',
     decoration: TextDecoration.none
@@ -29,7 +29,7 @@ class TextStyles {
     fontSize: 18,
     color: Colos.LOGINTEXT1,
     fontFamily: 'gilroy',
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w500,
     decoration: TextDecoration.none,
   );
 
@@ -37,8 +37,9 @@ class TextStyles {
     fontSize: 28,
     color: Colos.LOGINTEXT1,
     fontFamily: "gilroy",
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.bold,
   );
+
   static TextStyle textSize13 = TextStyle(
     fontSize: 13,
     color: Colos.LOGINTEXT1,

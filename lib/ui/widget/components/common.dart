@@ -165,10 +165,9 @@ class Common {
   bool value = false,
     VoidCallback? callback,
 }
-      ){
+){
     return ListTile(
       leading: Container(
-          padding: EdgeInsets.only(right: 20),
           height: 50,
           width: 4,
           color:
@@ -185,5 +184,38 @@ class Common {
       ),
       onTap: callback,
     );
+  }
+
+  Column StorageItem({
+  Color? iconColor,
+    String? strNameFile,
+    String? strGB,
+    String? assetsSvg,
+
+}){
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.circle, color: iconColor, size: 14),
+                  SizedBox(width: 10),
+                  Text(
+                    strNameFile??'',
+                    style: TextStyles.textSize22.copyWith(fontSize: 20),
+                  ),
+                ],
+              ),
+              SvgPicture.asset(assetsSvg??'',height: 5.3,)
+            ],
+          ),
+          SizedBox(height: 5),
+          Padding(padding: EdgeInsets.only(left: 22,top: 4,bottom: 26),
+              child: Text(strGB??''))
+        ],
+      );
   }
 }

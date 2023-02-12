@@ -27,6 +27,7 @@ class RouterGenerator{
   static const routeSetting =  "/settings";
   static const routeStorageDetail = "/storage";
   static const routeChangePassword = "/changepassword";
+  static const routeChangeLanguage = "/changelanguage";
 
   static Route<dynamic> generateRoute(RouteSettings settings){
     final args = settings.arguments;
