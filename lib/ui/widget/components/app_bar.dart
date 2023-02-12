@@ -10,7 +10,8 @@ PreferredSize appBarCommonV1(BuildContext context,
   return PreferredSize(
       preferredSize: Size.fromHeight(50),
       child: Container(
-        color: Colors.white,
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        color: Color(0xfff8f8f8),
         child: Column(
           children: [
             SizedBox(height: 40),
@@ -24,8 +25,18 @@ PreferredSize appBarCommonV1(BuildContext context,
                     color: Colos.LOGINTEXT1,
                   ),
                 ),
-                Text(strTitle??'', textAlign: TextAlign.center,style: TextStyles.textAppBar ,),
-                suffixIcon == true ? Container(width: 40 ): IconButton(onPressed: (){}, icon: Icon(Icons.more_horiz_outlined))
+                Text(
+                  strTitle ?? '',
+                  textAlign: TextAlign.center,
+                  style: TextStyles.textAppBar,
+                ),
+                suffixIcon == true
+                    ? SizedBox(width: 40)
+                    : IconButton(
+                        onPressed: () {},
+                        icon: Transform.scale(
+                          scale: 1.2,
+                            child: Icon(Icons.more_horiz_outlined)))
               ],
             )
           ],
@@ -45,7 +56,10 @@ PreferredSize appBarCommonV2(BuildContext context,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(strTitle??'', style: TextStyles.textSize24,),
+              Text(
+                strTitle ?? '',
+                style: TextStyles.textSize24,
+              ),
               IconButton(
                   onPressed: () {
                     NavigatorUtils.push(context, RouterGenerator.routeMenu);

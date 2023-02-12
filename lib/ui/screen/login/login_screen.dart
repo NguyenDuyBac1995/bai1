@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   .size
                   .width * 1.1,
               child: Transform.scale(
-                  scale: 1.08, child: Image.asset(ImageUtils.NEN)),
+                  scale: 1.12, child: Image.asset(ImageUtils.NEN)),
             ),
             Container(
               padding: EdgeInsets.only(left: 25, top: 80, right: 25),
@@ -239,28 +239,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                   }
               ),
-              // TextFormField(
-              //   decoration: InputDecoration(
-              //     focusedBorder: OutlineInputBorder(
-              //       borderSide:
-              //       BorderSide(width: 0.5, color: Colors.blue),
-              //       borderRadius: BorderRadius.circular(10),
-              //     ),
-              //     border: OutlineInputBorder(
-              //         borderSide: BorderSide(
-              //             width: 0.5, color: Colors.black38),
-              //         borderRadius: BorderRadius.circular(10)),
-              //     hintText: 'Username or email',
-              //     prefixIcon: Icon(Icons.person),
-              //   ),
-              //   validator: (val) =>
-              //   value == null ? 'Incorrect username' : null,
-              //   onChanged: (val) {
-              //     setState(() {
-              //       _userName = val;
-              //     });
-              //   },
-              // ),
               SizedBox(height: 10),
               Text(
                 "Password",
@@ -281,29 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 validationError: _textPassword != _password ? 'Incorrect password' : null,
                 obscureText: _obscureText,
               ),
-              // TextFormField(
-              //   decoration: InputDecoration(
-              //     focusedBorder: OutlineInputBorder(
-              //       borderSide:
-              //       BorderSide(width: 0.5, color: Colors.blue),
-              //       borderRadius: BorderRadius.circular(10),
-              //     ),
-              //     border: OutlineInputBorder(
-              //         borderSide: BorderSide(
-              //             width: 0.5, color: Colors.black38),
-              //         borderRadius: BorderRadius.circular(10)),
-              //     hintText: 'Password',
-              //     prefixIcon: Icon(Icons.lock),
-              //     suffixIcon: IconButton(
-              //         onPressed: _toggle,
-              //         icon: Icon(_obscureText
-              //             ? Icons.visibility_off
-              //             : Icons.visibility)),
-              //   ),
-              //   validator: (val) =>
-              //   val != _password ? 'Incorrect password' : null,
-              //   obscureText: _obscureText,
-              // ),
+
             ],
           ),
         ),

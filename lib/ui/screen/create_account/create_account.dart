@@ -90,6 +90,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 color: Colos.CA,
                 textValue: 'Create Account',
                 width: MediaQuery.of(context).size.width,
+                icon: false,
                 callback: (){
                   setState(() {
                     strName = _textUserName.text;

@@ -25,11 +25,11 @@ class TextStyles {
       fontWeight: FontWeight.w400,
       decoration: TextDecoration.none);
 
-  static TextStyle textAppBar = TextStyle(
+  static TextStyle textAppBar = const TextStyle(
     fontSize: 18,
     color: Colos.LOGINTEXT1,
     fontFamily: 'gilroy',
-    fontWeight: FontWeight.w200,
+    fontWeight: FontWeight.bold,
     decoration: TextDecoration.none,
   );
 
@@ -38,5 +38,11 @@ class TextStyles {
     color: Colos.LOGINTEXT1,
     fontFamily: "gilroy",
     fontWeight: FontWeight.w700,
+  );
+  static TextStyle textSize13 = TextStyle(
+    fontSize: 13,
+    color: Colos.LOGINTEXT1,
+    fontFamily: "gilroy",
+    fontWeight: FontWeight.w400,
   );
 }

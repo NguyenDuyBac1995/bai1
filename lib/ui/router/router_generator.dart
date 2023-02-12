@@ -46,8 +46,8 @@ class RouterGenerator{
       case routeMenu:
         return PageTransition(
             child: SideMenuScreen(),
-            type: PageTransitionType.rightToLeft,
-            duration: Duration(milliseconds: 700)
+            type: PageTransitionType.leftToRight,
+            duration: Duration(milliseconds: 500)
         );
       case routeProfile:
         return MaterialPageRoute(builder: (_)=> const ProfileScreen());

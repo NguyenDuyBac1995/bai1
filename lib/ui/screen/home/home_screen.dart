@@ -1,6 +1,5 @@
-import 'package:bai_tap_figma1/ui/router/fluro_navigator.dart';
-import 'package:bai_tap_figma1/ui/router/router_generator.dart';
 import 'package:bai_tap_figma1/ui/widget/components/app_bar.dart';
+import 'package:bai_tap_figma1/ui/widget/components/dummy_data.dart';
 import 'package:bai_tap_figma1/ui/widget/utils/colors.dart';
 import 'package:bai_tap_figma1/ui/widget/utils/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> color = ['0xffEEF7FE','0xffFFFBEC','0xffFEEEEE','0xffF0FFFF','0xffEEF7FE','0xffFFFBEC','0xffFEEEEE','0xffF0FFFF','0xffEEF7FE','0xffFFFBEC'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,20 +76,19 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 padding: EdgeInsets.only(top: 150),
                 child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200,
-                        childAspectRatio: 3 / 2,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 200,
+                            mainAxisExtent: 128,
+                            childAspectRatio: 3 / 2,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20),
                     itemCount: 10,
                     itemBuilder: (BuildContext ctx, index) {
-                      return Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Color(int.parse(color[index])),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Text(color[index]),
-                      );
+                      return Common().FolderFont(
+                          color: dummyData[index].color,
+                          name: dummyData[index].name,
+                          date: dummyData[index].date);
                     }),
               ),
             ],
