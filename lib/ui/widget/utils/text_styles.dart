@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:bai_tap_figma1/ui/widget/utils/colors.dart';
 
 class TextStyles {
+  static TextStyle textItem = TextStyle(
+      color: Colos.DAtext,
+      fontWeight: FontWeight.w300,
+      fontSize: 20,
+      fontFamily: 'gilroy',
+      decoration: TextDecoration.none
+  );
 
   static TextStyle textSize20 = TextStyle(
     color: Colos.LOGINTEXT1,

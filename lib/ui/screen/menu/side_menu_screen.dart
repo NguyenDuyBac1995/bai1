@@ -93,26 +93,21 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
           ),
           Container(
             padding: EdgeInsets.only(top: 190),
-            child: ListView.builder(
+            child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemCount: _menuItem.length,
               itemBuilder: (BuildContext context, index) {
-                return Column(
-                  children: [
-                    Common().ItemList(
-                        strName: _menuItem[index]['name'],
-                        value: checkedIndex == _menuItem[index]['name'],
-                        callback: () {
-                          setState(() {
-                            checkedIndex = _menuItem[index]['name'];
-                          });
-                          NavigatorUtils.push(
-                              context, _menuItem[index]['route']);
-                        }),
-                    SizedBox(height: 6)
-                  ],
-                );
-              },
+                return Common().ItemList(
+                    strName: _menuItem[index]['name'],
+                    value: checkedIndex == _menuItem[index]['name'],
+                    callback: () {
+                      setState(() {
+                        checkedIndex = _menuItem[index]['name'];
+                      });
+                      NavigatorUtils.push(
+                          context, _menuItem[index]['route']);
+                    });
+              }, separatorBuilder: (BuildContext context, int index) { return Divider(height: 6 , color: Colors.transparent,); },
             ),
           ),
           Positioned(

@@ -14,12 +14,12 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  bool _switchItem1 = true ;
-  bool _switchItem2 = true ;
+  bool _switchItem1 = false ;
+  bool _switchItem2 = false ;
   final List _settingItem = [
     {'name': 'Add Account', 'route': RouterGenerator.routeCreateAccount},
     {'name': 'Change Password','route': RouterGenerator.routeChangePassword},
-    {'name': 'Change Language','route': '' },
+    {'name': 'Change Language','route': RouterGenerator.routeChangeLanguage },
     {'name': 'Upgrade Plan','route':''},
     {'name': 'Multiple Account','route':''},
   ];
@@ -45,10 +45,9 @@ class _SettingScreenState extends State<SettingScreen> {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.symmetric(vertical: 23),
-                        child: Text(_settingItem[index]['name'], style: TextStyles.textSize20,),
+                        child: Text(_settingItem[index]['name'], style: TextStyles.textItem,),
                       ),
                       onTap: (){
-                        print('${_settingItem[index]['route']}' );
                         NavigatorUtils.push(context, '${_settingItem[index]['route']}');
                       },
                     );
